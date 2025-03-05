@@ -102,6 +102,36 @@ public:
     }
 };
 
+void reverse(SLL& list) {
+    if (list.head == nullptr || list.head->next == nullptr) {
+        // Empty list or single node - no need to reverse
+        return;
+    }
+    
+    Node* prev = nullptr;
+    Node* current = list.head;
+    Node* next = nullptr;
+    
+    // Save original head to become new tail
+    Node* new_tail = list.head;
+    
+    while (current != nullptr) {
+        // Store next node
+        next = current->next;
+        
+        // Reverse the link
+        current->next = prev;
+        
+        // Move pointers one step forward
+        prev = current;
+        current = next;
+    }
+    
+    // Update head and tail
+    list.tail = new_tail;
+    list.head = prev;
+}
+
 int main()
 {
     SLL list;
